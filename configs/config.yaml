@@ -1,0 +1,35 @@
+
+data:
+  input_dir: "data/raw"
+  output_dir: "data/processed"
+  file_type: "word"  # Supported types: "word", "pdf"
+  chunk_size: 2500
+  chunk_overlap: 50
+  separators: ["\n\n", "\n", ". ", "! ", "? "]
+
+model:
+  base_model: "unsloth/llama-3-8b-bnb-4bit"
+  max_seq_length: 2048
+  load_in_4bit: true
+  target_modules: ["o_proj"]
+  lora_r: 16
+  lora_alpha: 16
+  dtype: null  # Will be automatically determined
+
+training:
+  batch_size: 2
+  gradient_accumulation_steps: 4
+  learning_rate: 2e-4
+  num_epochs: 1
+  max_steps: 200
+  output_dir: "outputs"
+  save_format: "q8_0"  # Quantization format for saving
+  logging_steps: 1
+  seed: 3407
+
+ollama:
+  host: "localhost:11434"
+  model: "llama3.2:latest"
+  temperature: 0.7
+  top_p: 0.9
+  stop_sequences: ["<|im_end|>", "</s>"]

@@ -1,0 +1,10 @@
+torch
+transformers
+datasets
+trl
+unsloth
+python-docx
+PyMuPDF
+pyyaml
+tenacity
+requests
