@@ -8,6 +8,8 @@ __pycache__/
 .venv
 env/
 venv/
+poetry.lock
+pyproject.toml
 
 # Distribution / packaging
 .Python

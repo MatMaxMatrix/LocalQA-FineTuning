@@ -5,10 +5,10 @@ import logging
 from pathlib import Path
 
 from utils import load_config, setup_logging
-from processor import get_processor, ProcessingConfig
-from question_generator import QuestionGenerator
-from model import ModelManager
-from trainer import CustomTrainer
+from data import get_processor, ProcessingConfig
+from data import QuestionGenerator
+from training import ModelManager
+from training import CustomTrainer
 
 logger = logging.getLogger(__name__)
 

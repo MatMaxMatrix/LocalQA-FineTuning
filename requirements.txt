@@ -8,3 +8,4 @@ PyMuPDF
 pyyaml
 tenacity
 requests
+langchain
