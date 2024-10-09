@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *.so
 
+
 # Environments
 .env
 .venv
@@ -37,6 +38,7 @@ wheels/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+*.ipynb
 
 # Project-specific
 data/raw/*
