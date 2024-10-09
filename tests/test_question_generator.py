@@ -2,14 +2,15 @@
 
 import unittest
 from unittest.mock import patch, MagicMock
-from question_generator import QuestionGenerator, QuestionGenerationError
+from src.data.question_generator import QuestionGenerator
+from datasets import Dataset
 
 class TestQuestionGenerator(unittest.TestCase):
 
     def setUp(self):
-        self.generator = QuestionGenerator('dummy_config.yaml')
+        self.generator = QuestionGenerator('configs/config.yaml')
 
-    @patch('question_generator.requests.post')
+    @patch('src.data.question_generator.requests.post')
     def test_generate_questions(self, mock_post):
         # Mock the response from the Ollama API
         mock_response = MagicMock()
@@ -29,7 +30,7 @@ class TestQuestionGenerator(unittest.TestCase):
         self.assertEqual(result[0]['question'], "Test question?")
         self.assertEqual(result[0]['answer'], "Test answer.")
 
-    @patch('question_generator.QuestionGenerator._generate_questions')
+    @patch('src.data.question_generator.QuestionGenerator._generate_questions')
     def test_prepare_training_data(self, mock_generate_questions):
         # Mock the _generate_questions method
         mock_generate_questions.return_value = [
@@ -37,7 +38,7 @@ class TestQuestionGenerator(unittest.TestCase):
         ]
 
         # Create a dummy dataset
-        dummy_dataset = [{"text": "Sample text"}]
+        dummy_dataset = Dataset.from_dict({"text": ["Sample text"]})
 
         # Call prepare_training_data
         result = self.generator.prepare_training_data(dummy_dataset)

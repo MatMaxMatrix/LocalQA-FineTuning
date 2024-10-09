@@ -6,6 +6,7 @@ from dataclasses import dataclass
 import requests
 from datasets import Dataset
 from tenacity import retry, stop_after_attempt, wait_exponential
+import yaml
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +21,18 @@ class GenerationConfig:
     def __post_init__(self):
         if self.stop_sequences is None:
             self.stop_sequences = ["<|im_end|>", "</s>"]
+
+    @classmethod
+    def from_config(cls, config_path: str):
+        with open(config_path, 'r') as f:
+            conf = yaml.safe_load(f)
+        ollama_config = conf.get('ollama', {})
+        return cls(
+            temperature=ollama_config.get('temperature', 0.7),
+            top_p=ollama_config.get('top_p', 0.9),
+            max_tokens=ollama_config.get('max_tokens', 500),
+            stop_sequences=ollama_config.get('stop_sequences', ["<|im_end|>", "</s>"])
+        )
 
 class QuestionGenerationError(Exception):
     """Base exception for question generation errors."""
