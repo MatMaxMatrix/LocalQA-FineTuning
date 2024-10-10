@@ -45,3 +45,4 @@ data/raw/*
 data/processed/*
 outputs/
 *.log
+.DS_Store
