@@ -41,8 +41,8 @@ wheels/
 *.ipynb
 
 # Project-specific
-data/raw/*
-data/processed/*
+#data/raw/*
+#data/processed/*
 outputs/
 *.log
 .DS_Store
